@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="src/WarehouseHub.Api/WarehouseHub.Api.csproj" />
+  <Project Path="src/WarehouseHub.Application/WarehouseHub.Application.csproj" />
+  <Project Path="src/WarehouseHub.Contracts/WarehouseHub.Contracts.csproj" />
+  <Project Path="src/WarehouseHub.Domain/WarehouseHub.Domain.csproj" />
+  <Project Path="src/WarehouseHub.Infrastructure/WarehouseHub.Infrastructure.csproj" />
+</Solution>

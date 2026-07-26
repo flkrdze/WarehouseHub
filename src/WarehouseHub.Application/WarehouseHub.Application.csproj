@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WarehouseHub.Domain\WarehouseHub.Domain.csproj" />
+    <ProjectReference Include="..\WarehouseHub.Contracts\WarehouseHub.Contracts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Abstractions\" />
+    <Folder Include="Warehouses\" />
+    <Folder Include="Users\" />
+    <Folder Include="Products\" />
+    <Folder Include="Common\" />
+    <Folder Include="Authentication\" />
+  </ItemGroup>
+
+</Project>

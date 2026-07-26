@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Новая папка2\**" />
+    <EmbeddedResource Remove="Новая папка2\**" />
+    <None Remove="Новая папка2\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Products\" />
+    <Folder Include="Users\" />
+    <Folder Include="Authentication\" />
+    <Folder Include="Warehouses\" />
+  </ItemGroup>
+
+</Project>
