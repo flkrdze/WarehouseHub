@@ -11,6 +11,7 @@ namespace WarehouseHub.Domain.Entities
         public string Address { get; private set; }
         public Guid CompanyId { get; private set;  }
         public Company Company { get; private set; } = null!;
+        public ICollection<Shelf> Shelves { get; private set; } = new List<Shelf>();
 
         private Warehouse()
         {

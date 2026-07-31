@@ -11,6 +11,7 @@ namespace WarehouseHub.Domain.Entities
         public decimal CapacityInKg {  get; private set; }
         public Guid WarehouseId { get; private set;  }
         public Warehouse Warehouse { get; private set; } = null!;
+        public ICollection<Stock> Stocks { get; private set; } = new List<Stock>();
 
         private Shelf( )
         {

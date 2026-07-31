@@ -9,6 +9,8 @@ namespace WarehouseHub.Domain.Entities
         public Guid Id { get; private set; }
         public string Name { get; private set; }
         public DateTime CreatedAt { get; private set; }
+        public ICollection<User> Users { get; private set; } = new List<User>();
+        public ICollection<Warehouse> Warehouses { get; private set; } = new List<Warehouse>();
 
         private Company()
         {

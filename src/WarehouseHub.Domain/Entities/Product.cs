@@ -14,6 +14,7 @@ namespace WarehouseHub.Domain.Entities
         public decimal Weight { get; private set; }
         public string? Description { get; private set; }
         public bool IsArchived { get; private set; }
+        public ICollection<Stock> Stocks { get; private set; } = new List<Stock>();
 
         private Product ( ) 
         {
