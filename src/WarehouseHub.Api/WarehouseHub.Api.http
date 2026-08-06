@@ -4,3 +4,7 @@ GET {{WarehouseHub.Api_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
+
+POST {{WarehouseHub.Api_HostAddress}}/api/auth/register
+
+###

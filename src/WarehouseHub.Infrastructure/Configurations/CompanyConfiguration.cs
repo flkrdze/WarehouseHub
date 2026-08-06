@@ -18,7 +18,7 @@ namespace WarehouseHub.Infrastructure.Configurations
                 .IsRequired();
 
             builder.Property(x => x.CreatedAt)
-                .HasDefaultValue("CURRENT_TIMESTAMP");
+                .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
         }
     }

@@ -12,12 +12,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Abstractions\" />
+    <Folder Include="Abstractions\Authentication\" />
     <Folder Include="Warehouses\" />
     <Folder Include="Users\" />
     <Folder Include="Products\" />
     <Folder Include="Common\" />
-    <Folder Include="Authentication\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.3.11" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.10" />
   </ItemGroup>
 
 </Project>

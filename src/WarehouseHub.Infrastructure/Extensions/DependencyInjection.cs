@@ -1,10 +1,28 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Text;
+using WarehouseHub.Application.Abstractions.Persistence;
+using WarehouseHub.Infrastructure.Persistence;
 
 namespace WarehouseHub.Infrastructure.Extensions
 {
-    internal class DependencyInjection
+    public static class DependencyInjection
     {
+        public static IServiceCollection AddInfrastructure(
+            this IServiceCollection services,
+            IConfiguration configuration)
+        {
+            services.AddDbContext<WarehouseHubDbContext>(options =>
+            {
+                options.UseNpgsql(
+                    configuration.GetConnectionString("WarehouseHubDb"));
+            });
+            services.AddScoped<IApplicationDbContext>(provider =>
+                provider.GetRequiredService<WarehouseHubDbContext>());
+            return services;
+        }
     }
 }

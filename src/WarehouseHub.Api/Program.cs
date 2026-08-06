@@ -1,10 +1,26 @@
+using WarehouseHub.Contracts.Authentication;
+using Microsoft.EntityFrameworkCore;
+using WarehouseHub.Infrastructure;
+using WarehouseHub.Infrastructure.Extensions;
+using WarehouseHub.Infrastructure.Persistence;
+using WarehouseHub.Api.Endpoints.Authentication;
+using WarehouseHub.Application.Authentication.Register;
+
 var builder = WebApplication.CreateBuilder(args);
 
-
-builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddOpenApi();
+builder.Services.AddEndpointsApiExplorer();
+
+builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddScoped<RegisterUserHandler>();
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<WarehouseHubDbContext>();
+    db.Database.Migrate();
+}
 
 if (app.Environment.IsDevelopment())
 {
@@ -16,7 +32,6 @@ if (app.Environment.IsDevelopment())
 }
 
 //app.UseHttpsRedirection();
-
-app.MapGet("/", () => "WarehouseHub API");
+app.MapRegisterEndpoint();
 
 app.Run();

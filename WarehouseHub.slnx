@@ -1,4 +1,10 @@
 <Solution>
+  <Folder Name="/Элементы решения/">
+    <File Path=".env" />
+  </Folder>
+  <Project Path="docker-compose.dcproj">
+    <Build />
+  </Project>
   <Project Path="src/WarehouseHub.Api/WarehouseHub.Api.csproj" />
   <Project Path="src/WarehouseHub.Application/WarehouseHub.Application.csproj" />
   <Project Path="src/WarehouseHub.Contracts/WarehouseHub.Contracts.csproj" />

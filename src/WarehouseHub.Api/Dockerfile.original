@@ -12,14 +12,10 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["src/WarehouseHub.Api/WarehouseHub.Api.csproj", "src/WarehouseHub.Api/"]
-COPY ["src/WarehouseHub.Application/WarehouseHub.Application.csproj", "src/WarehouseHub.Application/"]
-COPY ["src/WarehouseHub.Domain/WarehouseHub.Domain.csproj", "src/WarehouseHub.Domain/"]
-COPY ["src/WarehouseHub.Contracts/WarehouseHub.Contracts.csproj", "src/WarehouseHub.Contracts/"]
-COPY ["src/WarehouseHub.Infrastructure/WarehouseHub.Infrastructure.csproj", "src/WarehouseHub.Infrastructure/"]
-RUN dotnet restore "./src/WarehouseHub.Api/WarehouseHub.Api.csproj"
+COPY ["WarehouseHub.Api/WarehouseHub.Api.csproj", "WarehouseHub.Api/"]
+RUN dotnet restore "./WarehouseHub.Api/WarehouseHub.Api.csproj"
 COPY . .
-WORKDIR "/src/src/WarehouseHub.Api"
+WORKDIR "/src/WarehouseHub.Api"
 RUN dotnet build "./WarehouseHub.Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # Этот этап используется для публикации проекта службы, который будет скопирован на последний этап
