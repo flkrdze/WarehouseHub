@@ -6,7 +6,8 @@ using System.Collections.Generic;
 using System.Text;
 using WarehouseHub.Application.Abstractions.Persistence;
 using WarehouseHub.Infrastructure.Persistence;
-
+using WarehouseHub.Infrastructure.Authentication;
+using WarehouseHub.Application.Abstractions.Authentication;
 namespace WarehouseHub.Infrastructure.Extensions
 {
     public static class DependencyInjection
@@ -22,6 +23,8 @@ namespace WarehouseHub.Infrastructure.Extensions
             });
             services.AddScoped<IApplicationDbContext>(provider =>
                 provider.GetRequiredService<WarehouseHubDbContext>());
+            services.AddScoped<IPasswordHasher, PasswordHasher>();
+
             return services;
         }
     }
