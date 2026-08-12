@@ -21,10 +21,20 @@ namespace WarehouseHub.Api.Endpoints.Authentication
 
                 if (!result.Success)
                 {
-                    return Results.Conflict(new
+                    return result.Error switch
                     {
-                        message = result.Error
-                    });
+                        RegisterUserError.EmailAlreadyExists =>
+                            Results.Conflict(new { message = "Email is already registered." }),
+
+                        RegisterUserError.InvalidPassword =>
+                            Results.BadRequest(new { message = "Password is invalid." }),
+
+                        RegisterUserError.InvalidEmail =>
+                            Results.BadRequest(new { message = "Email is invalid." }),
+
+                        _ =>
+                            Results.BadRequest(new { message = "Invalid registration data." })
+                    };
                 }
 
                 return Results.Created();

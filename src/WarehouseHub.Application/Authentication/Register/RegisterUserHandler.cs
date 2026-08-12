@@ -10,6 +10,7 @@ using System.ComponentModel;
 using Microsoft.AspNetCore.Identity;
 using WarehouseHub.Domain.Enums;
 using WarehouseHub.Application.Abstractions.Authentication;
+using System.ComponentModel.DataAnnotations;
 
 namespace WarehouseHub.Application.Authentication.Register
 {
@@ -28,7 +29,55 @@ namespace WarehouseHub.Application.Authentication.Register
         RegisterRequest request,
         CancellationToken cancellationToken)
         {
+
+            if (string.IsNullOrWhiteSpace(request.CompanyName))
+            {
+                return new RegisterUserResult
+                {
+                    Success = false,
+                    Error = RegisterUserError.InvalidCompanyName
+                };
+            }
+
+            if (string.IsNullOrWhiteSpace(request.FirstName))
+            {
+                return new RegisterUserResult
+                {
+                    Success = false,
+                    Error = RegisterUserError.InvalidFirstName
+                };
+            }
+
+            if (string.IsNullOrWhiteSpace(request.LastName))
+            {
+                return new RegisterUserResult
+                {
+                    Success = false,
+                    Error = RegisterUserError.InvalidLastName
+                };
+            }
+
+            bool isPasswordValid = request.Password.Length >= 8;
+
+            if (!isPasswordValid)
+            {
+                return new RegisterUserResult
+                {
+                    Success = false,
+                    Error = RegisterUserError.InvalidPassword
+                };
+            }
+
             var email = request.Email.Trim().ToLowerInvariant();
+
+            if (!new EmailAddressAttribute().IsValid(email))
+            {
+                return new RegisterUserResult
+                {
+                    Success = false,
+                    Error = RegisterUserError.InvalidEmail
+                };
+            }
 
             var exists = await _db.Users.
                 AnyAsync(x => x.Email == email, cancellationToken);
@@ -38,11 +87,12 @@ namespace WarehouseHub.Application.Authentication.Register
                 return new RegisterUserResult
                 {
                     Success = false,
-                    Error = "Email is already registered."
+                    Error = RegisterUserError.EmailAlreadyExists
                 };
             }
 
             var company = new Company(request.CompanyName);
+
             var passwordHash = _hasher.HashPassword(request.Password);
 
             var user = new User(
