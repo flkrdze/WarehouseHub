@@ -3,6 +3,7 @@ using System.Reflection.Metadata;
 using WarehouseHub.Contracts.Authentication;
 using WarehouseHub.Infrastructure.Persistence;
 using WarehouseHub.Application.Authentication.Register;
+using WarehouseHub.Application.Authentication.Login;
 
 namespace WarehouseHub.Api.Endpoints.Authentication
 {
@@ -39,6 +40,15 @@ namespace WarehouseHub.Api.Endpoints.Authentication
 
                 return Results.Created();
             }).WithName("Register");
+
+            auth.MapPost("/login", async (
+                LoginRequest request,
+                LoginUserHandler handler,
+                CancellationToken ct) => 
+            {
+                var result = handler.Handle(request, ct);
+
+            }).WithName("Login");
 
             return app;
         }
