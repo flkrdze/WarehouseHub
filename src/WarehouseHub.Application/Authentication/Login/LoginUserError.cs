@@ -8,6 +8,7 @@ namespace WarehouseHub.Application.Authentication.Login
     {
         None,
         InvalidEmail,
-        WrongPassord
+        InvalidPassword,
+        WrongPassword
     }
 }

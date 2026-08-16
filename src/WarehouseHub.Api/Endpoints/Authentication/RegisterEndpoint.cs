@@ -46,7 +46,26 @@ namespace WarehouseHub.Api.Endpoints.Authentication
                 LoginUserHandler handler,
                 CancellationToken ct) => 
             {
-                var result = handler.Handle(request, ct);
+                var result = await handler.Handle(request, ct);
+
+                if (!result.Success)
+                {
+                    return result.Error switch
+                    {
+                        LoginUserError.InvalidPassword =>
+                            Results.BadRequest(new { message = "Password is invalid." }),
+
+                        LoginUserError.InvalidEmail =>
+                            Results.BadRequest(new { message = "Email is invalid." }),
+
+                        LoginUserError.WrongPassword =>
+                            Results.BadRequest(new { message = "Password is wrong" }),
+
+                        _ =>
+                            Results.BadRequest(new {message = "Invalid login data"})
+                    };
+                }
+                return Results.Ok();
 
             }).WithName("Login");
 

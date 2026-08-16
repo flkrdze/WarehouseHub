@@ -24,7 +24,6 @@ namespace WarehouseHub.Infrastructure.Extensions
             services.AddScoped<IApplicationDbContext>(provider =>
                 provider.GetRequiredService<WarehouseHubDbContext>());
             services.AddScoped<IPasswordHasher, PasswordHasher>();
-
             return services;
         }
     }

@@ -6,8 +6,7 @@ namespace WarehouseHub.Application.Authentication.Login
 {
     public sealed class LoginUserResult
     {
-        public bool Succes { get; init; }
-
+        public bool Success { get; init; }
         public LoginUserError Error { get; init; }
     }
 }
