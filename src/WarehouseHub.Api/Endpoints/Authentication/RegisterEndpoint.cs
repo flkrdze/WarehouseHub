@@ -65,7 +65,10 @@ namespace WarehouseHub.Api.Endpoints.Authentication
                             Results.BadRequest(new {message = "Invalid login data"})
                     };
                 }
-                return Results.Ok();
+                return Results.Ok(new
+                {
+                    token = result.Token 
+                });
 
             }).WithName("Login");
 

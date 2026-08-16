@@ -28,6 +28,7 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       ConnectionStrings__WarehouseHubDb: Host=postgres;Port=5432;Database=${POSTGRES_DB};Username=${POSTGRES_USER};Password=${POSTGRES_PASSWORD}
+      Jwt__Secret: ${JWT_SECRET}
 
 volumes:
   postgres_data:

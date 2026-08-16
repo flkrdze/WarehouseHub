@@ -13,11 +13,16 @@ namespace WarehouseHub.Application.Authentication.Login
     {
         private readonly IApplicationDbContext _db;
         private readonly IPasswordHasher _passwordHasher;
+        private readonly ITokenService _tokenService;
 
-        public LoginUserHandler(IApplicationDbContext db, IPasswordHasher passwordHasher)
+        public LoginUserHandler(
+            IApplicationDbContext db,
+            IPasswordHasher passwordHasher,
+            ITokenService tokenService)
         {
             _db = db;
             _passwordHasher = passwordHasher;
+            _tokenService = tokenService;
         }
 
         public async Task<LoginUserResult> Handle(
@@ -69,9 +74,12 @@ namespace WarehouseHub.Application.Authentication.Login
                 };
             }
 
+            var token = _tokenService.GenerateToken(user.Id);
+
             return new LoginUserResult
             {
-                Success = true
+                Success = true,
+                Token = token
             };
         }
     }

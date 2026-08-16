@@ -8,5 +8,6 @@ namespace WarehouseHub.Application.Authentication.Login
     {
         public bool Success { get; init; }
         public LoginUserError Error { get; init; }
+        public string? Token { get; init; }
     }
 }
