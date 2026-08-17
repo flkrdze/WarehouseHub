@@ -4,6 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
 using System.Text;
 using WarehouseHub.Api.Endpoints.Authentication;
+using WarehouseHub.Api.Endpoints;
 using WarehouseHub.Application;
 using WarehouseHub.Application.Authentication.Register;
 using WarehouseHub.Contracts.Authentication;
@@ -40,6 +41,7 @@ builder.Services
             IssuerSigningKey = new SymmetricSecurityKey(
                 Encoding.UTF8.GetBytes(jwtSecret))
         };
+        options.MapInboundClaims = false;
     });
 
 builder.Services.AddAuthorization();
@@ -72,7 +74,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 // Endpoints
-
+app.MapCreateWarehouseEndpoint();
 app.MapRegisterEndpoint();
 app.MapMeEndpoint();
 

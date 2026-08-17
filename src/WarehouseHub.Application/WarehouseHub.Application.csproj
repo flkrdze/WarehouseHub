@@ -12,7 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Warehouses\" />
     <Folder Include="Users\" />
     <Folder Include="Products\" />
     <Folder Include="Common\" />
